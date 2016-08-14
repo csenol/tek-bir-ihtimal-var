@@ -15,27 +15,25 @@ object Exercise1 {
     // exceptions on initialization. It's a Scala quirk that when you
     // initialize a variable that uses abstract variables in it's
     // definition, it will throw a null pointer exception.
-    def terminal: Element[Boolean] =
-      Apply(alicePoints, bobPoints, (a: Int, b: Int) => a >= 21 || b >= 21)
-    def bobWinning: Element[Boolean] =
-      Apply(alicePoints, bobPoints, (a: Int, b: Int) => b > a)
+    def terminal: Element[Boolean] = ???
+
+    def bobWinning: Element[Boolean] = ???
+
   }
   case class InitialState() extends State {
-    val alicePoints = Constant(0)
-    val bobPoints = Constant(0)
+    val alicePoints = ???
+    val bobPoints = ???
   }
   case class NextState(current: State) extends State {
-    val aliceWinsPoint = Flip(0.52)
-    val alicePoints =
-      Apply(current.alicePoints, aliceWinsPoint,
-        (curr: Int, wins: Boolean) => if (wins) curr + 1 else curr)
-    val bobPoints =
-      Apply(current.bobPoints, aliceWinsPoint,
-        (curr: Int, wins: Boolean) => if (!wins) curr + 1 else curr)
+    val aliceWinsPoint = ???
+    val alicePoints = ???
+
+    val bobPoints = ???
+
   }
   def playFrom(current: State): Element[Boolean] = {
-    If(current.terminal, current.bobWinning, playFrom(NextState(current)))
+    ???
   }
-  val bobWins = playFrom(InitialState())
+  val bobWins = ???
   println(Importance.probability(bobWins, true))
 }

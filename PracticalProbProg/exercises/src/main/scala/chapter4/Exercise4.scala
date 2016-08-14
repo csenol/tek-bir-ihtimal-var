@@ -13,39 +13,14 @@ object Exercise4 {
     val cards = List(5, 4, 3, 2, 1)
     // The discrete uniform distribution chooses uniformly from a fixed
     // set of possibilities
-    val player1Card = discrete.Uniform(cards: _*)
-    val player2Card =
-      Chain(player1Card, (card: Int) =>
-        // Player 2 can get any card except the first player’s card
-        discrete.Uniform(cards.filter(_ != card): _*))
-    val player1Bet1 =
-      RichCPD(player1Card,
-        // Player 1 is more likely to bet with a higher card,
-        // but will sometimes bet with a lower card to bluff
-        OneOf(5, 4, 3) -> Flip(0.9),
-        * -> Flip(0.4) // ×××Change this for part (c)×××
-      )
-    val player2Bet =
-      RichCPD(player2Card, player1Bet1,
-        (OneOf(5, 4), *) -> Flip(0.9),
-        (*, OneOf(false)) -> Flip(0.5),
-        (*, *) -> Flip(0.1))
-    val player1Bet2 =
-      Apply(player1Card, player1Bet1, player2Bet,
-        (card: Int, bet11: Boolean, bet2: Boolean) =>
-          // Player 1’s second bet is only relevant if she passed the
-          // first time and player 2 bet
-          !bet11 && bet2 && (card == 5 || card == 4))
-    // This element represents the gain to player 1 from the game. I have
-    // made it an Element[Double] so I can query its mean.
-    val player1Gain =
-      Apply(player1Card, player2Card, player1Bet1, player2Bet, player1Bet2,
-        (card1: Int, card2: Int, bet11: Boolean,
-         bet2: Boolean, bet12: Boolean) =>
-          if (!bet11 && !bet2) 0.0
-          else if (bet11 && !bet2) 1.0
-          else if (!bet11 && bet2 && !bet12) -1.0
-          else if (card1 > card2) 2.0
-          else -2.0)
-  }
+    val player1Card = ???
+    val player2Card = ???
+    val player1Bet1 = ???
+
+    val player2Bet = ???
+
+    val player1Bet2 = ???
+
+    val player1Gain = ???
+
 }

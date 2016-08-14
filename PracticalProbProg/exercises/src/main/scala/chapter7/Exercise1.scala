@@ -12,9 +12,9 @@ object Exercise1 {
     val liked = Uniform(0, 1)
   }
   class Movie(actors: List[Actor]) {
-    private val likedContainer = Container(actors.map(_.liked):_*)
-    private val popularityMean = likedContainer.foldLeft(0.0)(_ max _)
-    val popularity = Normal(popularityMean, 0.01)
+    private val likedContainer = ???
+    private val popularityMean = ???
+    val popularity = ???
   }
   val actors = Array.fill(10)(new Actor)
   val movie1 = new Movie(List(actors(0), actors(1)))
@@ -36,8 +36,7 @@ object Exercise1 {
   // The evidence is provided as soft constraints. Hard conditions would
   // be extremely unlikely to be satisfied during sampling
   def constrain(movie: Movie, pop: Double) {
-    movie.popularity.addConstraint(d =>
-      math.exp(-(pop-d)×(pop-d)/0.01))
+    ???
   }
   constrain(movie1, 0.4)
   constrain(movie2, 0.2)
@@ -45,8 +44,8 @@ object Exercise1 {
   constrain(movie4, 0.5)
   constrain(movie5, 0.8)
   constrain(movie6, 0.4)
-  val alg =
-    MetropolisHastings(100000, ProposalScheme.default, movie7.popularity)
-  alg.start()
-  println(alg.mean(movie7.popularity))
+//  val alg =
+//    MetropolisHastings(100000, ProposalScheme.default, movie7.popularity)
+//  alg.start()
+//  println(alg.mean(movie7.popularity))
 }

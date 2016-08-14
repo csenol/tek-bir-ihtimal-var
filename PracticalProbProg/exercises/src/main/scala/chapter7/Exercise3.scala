@@ -9,22 +9,19 @@ import com.cra.figaro.library.atomic.continuous.Uniform
   */
 object Exercise3 {
   class Student {
-    val ability = Uniform(0, 1)
+    val ability = ???
   }
   class Subject {
-    val difficulty = Uniform(0, 1)
+    val difficulty = ???
   }
   class Instructor {
-    val quality = Uniform(0, 1)
+    val quality = ???
   }
   case class Course(subject: Subject, instructor: Instructor)
   case class Enrollment(student: Student, course: Course) {
-    val gradeMax =
-      Apply(student.ability, course.instructor.quality,
-        course.subject.difficulty,
-        (ability: Double, quality: Double, difficulty: Double) =>
-          (ability + quality - difficulty).max(0.0).min(1.0))
-    val grade = Uniform(Constant(0.0), gradeMax)
+    val gradeMax = ???
+
+    val grade = ???
   }
   val students = Array.fill(5)(new Student)
   val subjects = Array.fill(3)(new Subject)
@@ -48,7 +45,7 @@ object Exercise3 {
   val enrollment12 = Enrollment(students(4), course4)
 
   def constrain(enrollment: Enrollment, grd: Double) {
-    enrollment.grade.addConstraint(d => math.exp(-(grd-d)×(grd-d)/0.01))
+    ???
   }
   constrain(enrollment1, 0.3)
   constrain(enrollment2, 0.6)
@@ -62,11 +59,11 @@ object Exercise3 {
   constrain(enrollment10, 0.1)
   constrain(enrollment11, 0.2)
   constrain(enrollment12, 0.1)
-  val alg =
-    MetropolisHastings(100000, ProposalScheme.default,
-      students(1).ability, subjects(2).difficulty, instructors(1).quality)
-  alg.start()
-  println("students(1).ability: " + alg.mean(students(1).ability))
-  println("subjects(2).difficulty: " + alg.mean(subjects(2).difficulty))
-  println("instructors(1).quality: " + alg.mean(instructors(1).quality))
+//  val alg =
+//    MetropolisHastings(100000, ProposalScheme.default,
+//      students(1).ability, subjects(2).difficulty, instructors(1).quality)
+//  alg.start()
+//  println("students(1).ability: " + alg.mean(students(1).ability))
+//  println("subjects(2).difficulty: " + alg.mean(subjects(2).difficulty))
+//  println("instructors(1).quality: " + alg.mean(instructors(1).quality))
 }

@@ -22,27 +22,16 @@ object Exercise5 {
     val edges = Constant(Map[(Int, Int), Boolean]())
   }
   case class NextNetwork(current: Network) extends Network {
-    val newNodeAdded = Flip(0.1)
-    val nodes =
-      Apply(current.nodes, newNodeAdded, (ns: List[Int], b: Boolean) =>
-        if (b) ns.length :: ns else ns)
-    val edges =
-      If(newNodeAdded,
-        current.edges,
-        Chain(nodes, (ns: List[Int]) => {
-          val first = Uniform(ns:_*)
-          val second = Uniform(ns.filterNot(_ == first):_*)
-          Apply(current.edges, first, second,
-            (es: Map[(Int, Int), Boolean], f: Int, s: Int) =>
-              es + ((f, s) -> !es.getOrElse((f, s), false)))
-        }))
+    val newNodeAdded = ???
+    val nodes =  ???
+
+    val edges = ???
+
   }
-  def nthNetwork(n: Int): Network =
-    if (n <= 0) InitialNetwork() else NextNetwork(nthNetwork(n - 1))
-  val count =
-    Apply(nthNetwork(100).edges, (m: Map[(Int, Int), Boolean]) =>
-      m.values.filter(_ == true).size.toDouble)
-  val alg = Importance(10000, count)
-  alg.start()
-  println(alg.mean(count))
+  def nthNetwork(n: Int): Network = ???
+
+  val count = ???
+//  val alg = Importance(10000, count)
+//  alg.start()
+//  println(alg.mean(count))
 }
