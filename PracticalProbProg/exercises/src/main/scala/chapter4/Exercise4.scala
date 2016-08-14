@@ -7,17 +7,17 @@ import com.cra.figaro.library.compound.{RichCPD, OneOf, *}
 import com.cra.figaro.language.{Flip, Constant, Apply}
 import com.cra.figaro.algorithm.factored.VariableElimination
 
-object ex44 {
+object Exercise4 {
   def main(args: Array[String]) {
     // To keep the code simple, I just make the cards an integer
     val cards = List(5, 4, 3, 2, 1)
     // The discrete uniform distribution chooses uniformly from a fixed
     // set of possibilities
-    val player1Card = discrete.Uniform(cards:_*)
+    val player1Card = discrete.Uniform(cards: _*)
     val player2Card =
       Chain(player1Card, (card: Int) =>
         // Player 2 can get any card except the first player’s card
-        discrete.Uniform(cards.filter(_ != card):_*))
+        discrete.Uniform(cards.filter(_ != card): _*))
     val player1Bet1 =
       RichCPD(player1Card,
         // Player 1 is more likely to bet with a higher card,
@@ -47,3 +47,5 @@ object ex44 {
           else if (!bet11 && bet2 && !bet12) -1.0
           else if (card1 > card2) 2.0
           else -2.0)
+  }
+}
