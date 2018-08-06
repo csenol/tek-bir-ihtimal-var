@@ -37,7 +37,7 @@ object Exercise1 {
   // be extremely unlikely to be satisfied during sampling
   def constrain(movie: Movie, pop: Double) {
     movie.popularity.addConstraint(d =>
-      math.exp(-(pop-d)×(pop-d)/0.01))
+      math.exp(-(pop-d) * (pop-d)/0.01))
   }
   constrain(movie1, 0.4)
   constrain(movie2, 0.2)

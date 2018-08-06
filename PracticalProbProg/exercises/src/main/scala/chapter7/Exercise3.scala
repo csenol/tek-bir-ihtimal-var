@@ -48,7 +48,7 @@ object Exercise3 {
   val enrollment12 = Enrollment(students(4), course4)
 
   def constrain(enrollment: Enrollment, grd: Double) {
-    enrollment.grade.addConstraint(d => math.exp(-(grd-d)×(grd-d)/0.01))
+    enrollment.grade.addConstraint(d => math.exp(-(grd-d)*(grd-d)/0.01))
   }
   constrain(enrollment1, 0.3)
   constrain(enrollment2, 0.6)
